@@ -31175,7 +31175,7 @@ async function run() {
             releases = releases.filter(x => x.draft != true);
         }
         if (title) {
-            releases = releases.filter(x => x.title.includes(title));
+            releases = releases.filter(x => x.name.includes(title));
         }
         if (asset) {
             assets = assets.filter(x => x.name == asset);
