@@ -22,6 +22,12 @@ inputs:
   token:
     description: 'The GitHub token or personal access token'
     required: false
+  title:
+    description: 'Title of release must loosely match this'
+    required: false
+  asset:
+    description: 'File name of asset to fetch'
+    required: false
 outputs:
   release:
     description: 'Latest release name'
