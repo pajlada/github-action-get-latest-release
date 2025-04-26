@@ -31161,13 +31161,11 @@ async function run() {
         if (repository) {
             [owner, repo] = repository.split("/");
         }
-        let assets = [];
         var releases = await octokit.repos.listReleases({
             owner: owner,
             repo: repo,
         });
         releases = releases.data;
-        assets = releases.assets;
         if (excludes.includes('prerelease')) {
             releases = releases.filter(x => x.prerelease != true);
         }
@@ -31178,13 +31176,13 @@ async function run() {
             releases = releases.filter(x => x.name.includes(title));
         }
         if (asset) {
-            assets = assets.filter(x => x.name == asset);
         }
         if (releases.length) {
             core.setOutput('release', releases[0].tag_name);
             core.setOutput('id', String(releases[0].id));
             core.setOutput('description', String(releases[0].body));
             if (asset) {
+                const assets = releases[0].assets.filter(x => x.name == asset);
                 if (assets.length) {
                     core.setOutput('asset_id', assets[0].id);
                 } else {
